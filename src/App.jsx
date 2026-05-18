@@ -61,10 +61,10 @@ const stack = [
     logo: "/logos/javascript.svg",
   },
   {
-    name: "PHP",
+    name: "React",
     desc: "Backend workflows and web systems",
     value: 78,
-    logo: "/logos/php.svg",
+    logo: "/logos/react.svg",
   },
   {
     name: "Java",
@@ -870,19 +870,7 @@ const lastName = "Bandara";
                         </div>
 
                         {/* ANIMATED BAR */}
-                        <div className="mt-5 h-2 overflow-hidden rounded-full bg-white/10">
-                          <motion.div
-                            className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-fuchsia-500"
-                            initial={{ width: 0 }}
-                            animate={{
-                              width: stackVisible ? `${item.value}%` : "0%",
-                            }}
-                            transition={{
-                              duration: 1.2,
-                              ease: "easeOut",
-                            }}
-                          />
-                        </div>
+                        
                       </div>
                     </motion.div>
                   );
