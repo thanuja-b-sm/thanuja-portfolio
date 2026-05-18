@@ -825,19 +825,7 @@ export default function Portfolio() {
                       </div>
 
                       {/* ANIMATED BAR */}
-                      <div className="mt-5 h-3 overflow-hidden rounded-full bg-white/10">
-                        <motion.div
-                          className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-fuchsia-500"
-                          initial={{ width: 0 }}
-                          animate={{
-                            width: stackVisible ? `${item.value}%` : "0%",
-                          }}
-                          transition={{
-                            duration: 1.2,
-                            ease: "easeOut",
-                          }}
-                        />
-                      </div>
+                      
                     </div>
 
                     <div className="shrink-0 text-right text-xs uppercase tracking-[0.35em] text-white/35">
