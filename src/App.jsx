@@ -59,7 +59,12 @@ const stack = [
     value: 88,
     logo: "/logos/javascript.svg",
   },
-  { name: "PHP", desc: "Backend workflows and web systems", value: 78, logo: "/logos/php.svg" },
+  {
+    name: "React",
+    desc: "Backend workflows and web systems",
+    value: 78,
+    logo: "/logos/react.svg",
+  },
   {
     name: "Java",
     desc: "Desktop apps, OOP, system thinking",
@@ -382,28 +387,27 @@ function TimelineRoadmap() {
 }
 
 export default function Portfolio() {
+  const stackSectionRef = useRef(null);
+  const [stackVisible, setStackVisible] = useState(false);
 
-const stackSectionRef = useRef(null);
-const [stackVisible, setStackVisible] = useState(false);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStackVisible(true);
+        }
+      },
+      {
+        threshold: 0.3,
+      },
+    );
 
-useEffect(() => {
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      if (entry.isIntersecting) {
-        setStackVisible(true);
-      }
-    },
-    {
-      threshold: 0.3,
+    if (stackSectionRef.current) {
+      observer.observe(stackSectionRef.current);
     }
-  );
 
-  if (stackSectionRef.current) {
-    observer.observe(stackSectionRef.current);
-  }
-
-  return () => observer.disconnect();
-}, []);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div className="min-h-screen overflow-hidden bg-[#06070a] text-white">
@@ -483,7 +487,8 @@ useEffect(() => {
                   Personal Identity
                 </p>
                 <h2 className="mt-3 max-w-md text-2xl font-semibold leading-tight md:text-3xl">
-                  Somewhere between a tech builder, a creative mind, and a future brand.
+                  Somewhere between a tech builder, a creative mind, and a
+                  future brand.
                 </h2>
               </div>
             </div>
@@ -536,15 +541,15 @@ useEffect(() => {
 
           <div className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-7 shadow-[0_10px_40px_rgba(0,0,0,0.28)] backdrop-blur md:p-10">
             <p className="text-lg leading-relaxed text-white/75">
-              I am a second-year BICT(Hons) student at the University of
-              Colombo and also studying Software Engineering at the Java
-              Institute for Advanced Technology. My interests move across web
-              development, game design, AI, machine learning, cybersecurity,
-              data science, content creation, music production, and
-              entrepreneurship.
+              I am a second-year BICT(Hons) student at the University of Colombo
+              and also studying Software Engineering at the Java Institute for
+              Advanced Technology. My interests move across web development,
+              game design, AI, machine learning, cybersecurity, data science,
+              content creation, music production, and entrepreneurship.
             </p>
             <blockquote className="mt-8 border-l-2 border-cyan-400 pl-5 text-2xl font-semibold leading-snug text-white md:text-3xl">
-              Build useful things. Make them elegant. Make them feel intentional.
+              Build useful things. Make them elegant. Make them feel
+              intentional.
             </blockquote>
           </div>
         </div>
@@ -616,241 +621,235 @@ useEffect(() => {
       <TimelineRoadmap />
 
       <section
-  id="stack"
-  ref={stackSectionRef}
-  className="px-6 py-18 md:px-12 md:py-24"
->
-  <div className="mx-auto max-w-7xl">
-    <div className="mb-12 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-      <div className="max-w-3xl">
-        <p className="mb-3 text-xs uppercase tracking-[0.35em] text-white/45">
-          Tech Stack
-        </p>
+        id="stack"
+        ref={stackSectionRef}
+        className="px-6 py-18 md:px-12 md:py-24"
+      >
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-12 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-3xl">
+              <p className="mb-3 text-xs uppercase tracking-[0.35em] text-white/45">
+                Tech Stack
+              </p>
 
-        <h2 className="text-4xl font-black leading-tight text-white md:text-6xl">
-          Capabilities & technologies.
-        </h2>
+              <h2 className="text-4xl font-black leading-tight text-white md:text-6xl">
+                Capabilities & technologies.
+              </h2>
 
-        <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white/60">
-          Not a boring list — more like a living control panel for what I
-          build with, think with, and ship with.
-        </p>
-      </div>
-
-      <div className="rounded-[2rem] border border-white/10 bg-white/[0.03] px-6 py-5 shadow-[0_10px_40px_rgba(0,0,0,0.28)] backdrop-blur">
-        <p className="text-xs uppercase tracking-[0.35em] text-cyan-300/80">
-          Focus
-        </p>
-
-        <p className="mt-2 text-xl font-semibold text-white">
-          Build. Analyze. Polish.
-        </p>
-      </div>
-    </div>
-
-    <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
-      {/* LEFT ORBIT */}
-      <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/[0.03] p-6 shadow-[0_10px_40px_rgba(0,0,0,0.28)] backdrop-blur md:p-8">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.14),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(217,70,239,0.12),transparent_30%)]" />
-
-        <div className="relative flex min-h-[720px] items-center justify-center md:min-h-[760px]">
-          <div className="absolute h-[300px] w-[300px] rounded-full border border-cyan-400/20" />
-          <div className="absolute h-[420px] w-[420px] rounded-full border border-fuchsia-400/10" />
-          <div className="absolute h-[540px] w-[540px] rounded-full border border-white/5" />
-
-          {/* CENTER CORE */}
-          <motion.div
-            className="relative z-10 flex h-44 w-44 items-center justify-center rounded-full border border-white/15 bg-gradient-to-br from-cyan-400 via-blue-500 to-fuchsia-500 p-[1px] shadow-[0_0_60px_rgba(34,211,238,0.35)]"
-            animate={{
-              scale: [1, 1.04, 1],
-              rotate: [0, 6, -6, 0],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          >
-            <div className="flex h-full w-full flex-col items-center justify-center rounded-full bg-[#06070a]/90 text-center backdrop-blur-xl">
-              <span className="text-[0.7rem] uppercase tracking-[0.4em] text-white/45">
-                Core
-              </span>
-
-              <span className="mt-2 text-3xl font-black text-white">
-                Stack
-              </span>
-
-              <span className="mt-1 text-xs text-white/50">
-                signal map
-              </span>
+              <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white/60">
+                Not a boring list — more like a living control panel for what I
+                build with, think with, and ship with.
+              </p>
             </div>
-          </motion.div>
 
-          {/* ORBIT ITEMS */}
-          {stack.map((item, index) => {
-            const angle =
-              (index / stack.length) * Math.PI * 2 - Math.PI / 2;
+            <div className="rounded-[2rem] border border-white/10 bg-white/[0.03] px-6 py-5 shadow-[0_10px_40px_rgba(0,0,0,0.28)] backdrop-blur">
+              <p className="text-xs uppercase tracking-[0.35em] text-cyan-300/80">
+                Focus
+              </p>
 
-            const radius = 235;
+              <p className="mt-2 text-xl font-semibold text-white">
+                Build. Analyze. Polish.
+              </p>
+            </div>
+          </div>
 
-            const x = Math.cos(angle) * radius;
-            const y = Math.sin(angle) * radius;
+          <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
+            {/* LEFT ORBIT */}
+            <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/[0.03] p-6 shadow-[0_10px_40px_rgba(0,0,0,0.28)] backdrop-blur md:p-8">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.14),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(217,70,239,0.12),transparent_30%)]" />
 
-            const isBright = index % 2 === 0;
+              <div className="relative flex min-h-[720px] items-center justify-center md:min-h-[760px]">
+                <div className="absolute h-[300px] w-[300px] rounded-full border border-cyan-400/20" />
+                <div className="absolute h-[420px] w-[420px] rounded-full border border-fuchsia-400/10" />
+                <div className="absolute h-[540px] w-[540px] rounded-full border border-white/5" />
 
-            return (
-              <motion.div
-                key={item.name}
-                className="absolute -translate-x-1/2 -translate-y-1/2"
-                style={{
-                  left: `calc(50% + ${x}px)`,
-                  top: `calc(50% + ${y}px)`,
-                }}
-                whileHover={{
-                  scale: 1.06,
-                  y: -4,
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 260,
-                  damping: 20,
-                }}
-              >
-                <div className="w-[190px] rounded-[1.7rem] border border-white/10 bg-white/[0.05] p-5 text-left shadow-[0_10px_32px_rgba(0,0,0,0.22)] backdrop-blur-xl transition hover:border-cyan-400/30">
-                  <div className="flex items-center justify-between gap-3">
-                    <div
-                      className={`h-2.5 w-2.5 rounded-full ${
-                        isBright
-                          ? "bg-cyan-400"
-                          : "bg-fuchsia-400"
-                      } shadow-[0_0_16px_currentColor]`}
-                    />
+                {/* CENTER CORE */}
+                <motion.div
+                  className="relative z-10 flex h-44 w-44 items-center justify-center rounded-full border border-white/15 bg-gradient-to-br from-cyan-400 via-blue-500 to-fuchsia-500 p-[1px] shadow-[0_0_60px_rgba(34,211,238,0.35)]"
+                  animate={{
+                    scale: [1, 1.04, 1],
+                    rotate: [0, 6, -6, 0],
+                  }}
+                  transition={{
+                    duration: 8,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                >
+                  <div className="flex h-full w-full flex-col items-center justify-center rounded-full bg-[#06070a]/90 text-center backdrop-blur-xl">
+                    <span className="text-[0.7rem] uppercase tracking-[0.4em] text-white/45">
+                      Core
+                    </span>
 
-                    <span className="text-[0.65rem] uppercase tracking-[0.35em] text-white/35">
-                      {item.value}%
+                    <span className="mt-2 text-3xl font-black text-white">
+                      Stack
+                    </span>
+
+                    <span className="mt-1 text-xs text-white/50">
+                      signal map
                     </span>
                   </div>
+                </motion.div>
 
-                  {/* LOGO + TITLE */}
-                  <div className="mt-4 flex items-center gap-3">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.06] p-2 backdrop-blur">
-                      <img
-                        src={item.logo}
-                        alt={item.name}
-                        className="h-full w-full object-contain"
-                        onError={(e) => {
-                          e.currentTarget.style.display = "none";
-                        }}
-                      />
-                    </div>
+                {/* ORBIT ITEMS */}
+                {stack.map((item, index) => {
+                  const angle =
+                    (index / stack.length) * Math.PI * 2 - Math.PI / 2;
 
-                    <div className="min-w-0">
-                      <h3 className="text-base font-semibold text-white">
-                        {item.name}
-                      </h3>
+                  const radius = 235;
 
-                      <p className="text-xs leading-relaxed text-white/50">
-                        {item.desc}
-                      </p>
-                    </div>
-                  </div>
+                  const x = Math.cos(angle) * radius;
+                  const y = Math.sin(angle) * radius;
 
-                  {/* ANIMATED BAR */}
-                  <div className="mt-5 h-2 overflow-hidden rounded-full bg-white/10">
+                  const isBright = index % 2 === 0;
+
+                  return (
                     <motion.div
-  className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-fuchsia-500"
-  initial={{ width: 0 }}
-  animate={{
-    width: stackVisible ? `${item.value}%` : "0%",
-  }}
-  transition={{
-    duration: 1.2,
-    ease: "easeOut",
-  }}
-/>
-                  </div>
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* RIGHT LIST */}
-      <div className="space-y-4">
-        {stack.map((item, index) => (
-          <motion.div
-            key={item.name}
-            whileHover={{ x: 6 }}
-            transition={{
-              type: "spring",
-              stiffness: 260,
-              damping: 20,
-            }}
-            className="min-h-[120px] rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-5 shadow-[0_10px_40px_rgba(0,0,0,0.28)] backdrop-blur"
-          >
-            <div className="flex h-full items-center justify-between gap-4">
-              <div className="min-w-0 flex-1">
-                <div className="flex items-center gap-4">
-                  {/* LOGO */}
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.05] p-2">
-                    <img
-                      src={item.logo}
-                      alt={item.name}
-                      className="h-full w-full object-contain"
-                      onError={(e) => {
-                        e.currentTarget.style.display = "none";
+                      key={item.name}
+                      className="absolute -translate-x-1/2 -translate-y-1/2"
+                      style={{
+                        left: `calc(50% + ${x}px)`,
+                        top: `calc(50% + ${y}px)`,
                       }}
-                    />
-                  </div>
+                      whileHover={{
+                        scale: 1.06,
+                        y: -4,
+                      }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 260,
+                        damping: 20,
+                      }}
+                    >
+                      <div className="w-[190px] rounded-[1.7rem] border border-white/10 bg-white/[0.05] p-5 text-left shadow-[0_10px_32px_rgba(0,0,0,0.22)] backdrop-blur-xl transition hover:border-cyan-400/30">
+                        <div className="flex items-center justify-between gap-3">
+                          <div
+                            className={`h-2.5 w-2.5 rounded-full ${
+                              isBright ? "bg-cyan-400" : "bg-fuchsia-400"
+                            } shadow-[0_0_16px_currentColor]`}
+                          />
 
-                  <span
-                    className={`h-3 w-3 rounded-full ${
-                      index % 2 === 0
-                        ? "bg-cyan-400"
-                        : "bg-fuchsia-400"
-                    } shadow-[0_0_16px_currentColor]`}
-                  />
+                          <span className="text-[0.65rem] uppercase tracking-[0.35em] text-white/35">
+                            {item.value}%
+                          </span>
+                        </div>
 
-                  <div>
-                    <h3 className="truncate text-xl font-semibold text-white">
-                      {item.name}
-                    </h3>
+                        {/* LOGO + TITLE */}
+                        <div className="mt-4 flex items-center gap-3">
+                          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.06] p-2 backdrop-blur">
+                            <img
+                              src={item.logo}
+                              alt={item.name}
+                              className="h-full w-full object-contain"
+                              onError={(e) => {
+                                e.currentTarget.style.display = "none";
+                              }}
+                            />
+                          </div>
 
-                    <p className="mt-1 text-sm text-white/45">
-                      {item.desc}
-                    </p>
-                  </div>
-                </div>
+                          <div className="min-w-0">
+                            <h3 className="text-base font-semibold text-white">
+                              {item.name}
+                            </h3>
 
-                {/* ANIMATED BAR */}
-                <div className="mt-5 h-3 overflow-hidden rounded-full bg-white/10">
-                 <motion.div
-  className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-fuchsia-500"
-  initial={{ width: 0 }}
-  animate={{
-    width: stackVisible ? `${item.value}%` : "0%",
-  }}
-  transition={{
-    duration: 1.2,
-    ease: "easeOut",
-  }}
-/>
-                </div>
-              </div>
+                            <p className="text-xs leading-relaxed text-white/50">
+                              {item.desc}
+                            </p>
+                          </div>
+                        </div>
 
-              <div className="shrink-0 text-right text-xs uppercase tracking-[0.35em] text-white/35">
-                {item.value}%
+                        {/* ANIMATED BAR */}
+                        <div className="mt-5 h-2 overflow-hidden rounded-full bg-white/10">
+                          <motion.div
+                            className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-fuchsia-500"
+                            initial={{ width: 0 }}
+                            animate={{
+                              width: stackVisible ? `${item.value}%` : "0%",
+                            }}
+                            transition={{
+                              duration: 1.2,
+                              ease: "easeOut",
+                            }}
+                          />
+                        </div>
+                      </div>
+                    </motion.div>
+                  );
+                })}
               </div>
             </div>
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  </div>
-</section>
-          
-             
+
+            {/* RIGHT LIST */}
+            <div className="space-y-4">
+              {stack.map((item, index) => (
+                <motion.div
+                  key={item.name}
+                  whileHover={{ x: 6 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 260,
+                    damping: 20,
+                  }}
+                  className="min-h-[120px] rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-5 shadow-[0_10px_40px_rgba(0,0,0,0.28)] backdrop-blur"
+                >
+                  <div className="flex h-full items-center justify-between gap-4">
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-4">
+                        {/* LOGO */}
+                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.05] p-2">
+                          <img
+                            src={item.logo}
+                            alt={item.name}
+                            className="h-full w-full object-contain"
+                            onError={(e) => {
+                              e.currentTarget.style.display = "none";
+                            }}
+                          />
+                        </div>
+
+                        <span
+                          className={`h-3 w-3 rounded-full ${
+                            index % 2 === 0 ? "bg-cyan-400" : "bg-fuchsia-400"
+                          } shadow-[0_0_16px_currentColor]`}
+                        />
+
+                        <div>
+                          <h3 className="truncate text-xl font-semibold text-white">
+                            {item.name}
+                          </h3>
+
+                          <p className="mt-1 text-sm text-white/45">
+                            {item.desc}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* ANIMATED BAR */}
+                      <div className="mt-5 h-3 overflow-hidden rounded-full bg-white/10">
+                        <motion.div
+                          className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-fuchsia-500"
+                          initial={{ width: 0 }}
+                          animate={{
+                            width: stackVisible ? `${item.value}%` : "0%",
+                          }}
+                          transition={{
+                            duration: 1.2,
+                            ease: "easeOut",
+                          }}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="shrink-0 text-right text-xs uppercase tracking-[0.35em] text-white/35">
+                      {item.value}%
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section id="contact" className="px-6 pb-10 pt-16 md:px-12">
         <div className="mx-auto max-w-7xl border-t border-white/10 pt-14">
