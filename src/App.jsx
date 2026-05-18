@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
+import { FaInstagram, FaFacebookF } from "react-icons/fa";
 
 const projects = [
   {
@@ -60,10 +61,10 @@ const stack = [
     logo: "/logos/javascript.svg",
   },
   {
-    name: "React",
+    name: "PHP",
     desc: "Backend workflows and web systems",
     value: 78,
-    logo: "/logos/react.svg",
+    logo: "/logos/php.svg",
   },
   {
     name: "Java",
@@ -170,7 +171,7 @@ function TimelineRoadmap() {
       const current = windowHeight - rect.top;
       const next = Math.max(0, Math.min(1, current / total));
 
-      setProgress((prev) => prev + (next - prev) * 0.08);
+      setProgress((prev) => prev + (next - prev) * 0.14);
     };
 
     onScroll();
@@ -321,10 +322,7 @@ function TimelineRoadmap() {
           </svg>
 
           {timelineNodes.map((item) => {
-            const active = progress >= item.threshold;
-            const translateClass = active
-              ? "translate-y-0 opacity-100"
-              : "translate-y-6 opacity-40";
+           
             const sideClass =
               item.side === "left"
                 ? "left-0 md:left-[2%]"
@@ -332,13 +330,29 @@ function TimelineRoadmap() {
             const badgeSide = item.side === "left" ? "right-6" : "left-6";
 
             return (
-              <div
-                key={item.title}
-                className={`absolute w-full transition-all duration-700 md:w-[420px] ${sideClass}`}
-                style={{ top: `${item.y - 90}px` }}
-              >
+              <motion.div
+  key={item.title}
+  className={`absolute w-full md:w-[420px] ${sideClass}`}
+  style={{ top: `${item.y - 90}px` }}
+  initial={{
+    opacity: 0,
+    y: 40,
+    scale: 0.96,
+  }}
+  whileInView={{
+    opacity: 1,
+    y: 0,
+    scale: 1,
+  }}
+  viewport={{ once: true, amount: 0.3 }}
+  transition={{
+    duration: 0.7,
+    ease: [0.22, 1, 0.36, 1],
+  }}
+>
+  
                 <div
-                  className={`relative rounded-[2rem] border border-white/10 bg-white/[0.04] p-7 shadow-[0_20px_80px_rgba(0,0,0,0.45)] backdrop-blur-2xl transition-all duration-700 ${translateClass}`}
+                  className={`relative rounded-[2rem] border border-white/10 bg-white/[0.04] p-7 shadow-[0_20px_80px_rgba(0,0,0,0.45)] backdrop-blur-2xl transition-all duration-700 `}
                 >
                   <motion.img
                     src={
@@ -377,7 +391,7 @@ function TimelineRoadmap() {
                     {item.desc}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>
@@ -409,6 +423,13 @@ export default function Portfolio() {
     return () => observer.disconnect();
   }, []);
 
+  const identityText =
+    "Somewhere between a tech builder, a creative mind, and a future brand.";
+
+  const words = identityText.split(" ");
+
+  const firstName = "Thanuja";
+const lastName = "Bandara";
   return (
     <div className="min-h-screen overflow-hidden bg-[#06070a] text-white">
       <header className="relative z-20 px-6 pt-6 md:px-12 md:pt-8">
@@ -443,12 +464,61 @@ export default function Portfolio() {
             <p className="mb-4 text-xs uppercase tracking-[0.35em] text-white/45">
               Software • Data • Design • Brand
             </p>
-            <h1 className="text-[4.5rem] font-black leading-[0.82] tracking-[-0.06em] text-white md:text-[8rem]">
-              Thanuja
-            </h1>
-            <h1 className="mt-0 bg-clip-text text-[4.5rem] font-black leading-[0.82] tracking-[-0.06em] text-transparent opacity-85 md:text-[8rem] bg-gradient-to-r from-cyan-400 via-blue-500 to-fuchsia-500">
-              Bandara
-            </h1>
+           <div className="select-none">
+  {/* FIRST NAME */}
+  <h1 className="flex flex-wrap text-[4.5rem] font-black leading-[0.82] tracking-[-0.06em] text-white md:text-[8rem]">
+    {firstName.split("").map((char, index) => (
+      <motion.span
+        key={index}
+        initial={{
+          opacity: 0,
+          y: 80,
+          filter: "blur(10px)",
+        }}
+        animate={{
+          opacity: 1,
+          y: 0,
+          filter: "blur(0px)",
+        }}
+        transition={{
+          duration: 0.55,
+          delay: index * 0.045,
+          ease: [0.22, 1, 0.36, 1],
+        }}
+        className="inline-block"
+      >
+        {char === " " ? "\u00A0" : char}
+      </motion.span>
+    ))}
+  </h1>
+
+  {/* LAST NAME */}
+  <h1 className="mt-0 flex flex-wrap text-[4.5rem] font-black leading-[0.82] tracking-[-0.06em] opacity-90 md:text-[8rem]">
+  {lastName.split("").map((char, index) => (
+    <motion.span
+      key={index}
+      initial={{
+        opacity: 0,
+        y: 80,
+        filter: "blur(10px)",
+      }}
+      animate={{
+        opacity: 1,
+        y: 0,
+        filter: "blur(0px)",
+      }}
+      transition={{
+        duration: 0.55,
+        delay: 0.4 + index * 0.045,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      className="inline-block bg-gradient-to-r from-cyan-400 via-blue-500 to-fuchsia-500 bg-clip-text text-transparent"
+    >
+      {char === " " ? "\u00A0" : char}
+    </motion.span>
+  ))}
+</h1>
+</div>
             <p className="mt-8 max-w-2xl text-lg leading-relaxed text-white/65 md:text-xl">
               I build thoughtful digital experiences with a strong technical
               backbone — blending software engineering, data-minded structure,
@@ -473,6 +543,25 @@ export default function Portfolio() {
           <div className="relative">
             <div className="absolute -inset-6 rounded-[2rem] bg-gradient-to-tr from-cyan-500/10 via-transparent to-fuchsia-500/10 blur-2xl" />
             <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] shadow-[0_30px_80px_rgba(0,0,0,0.45)] backdrop-blur-2xl">
+              <div className="absolute left-5 top-5 z-20 flex gap-3">
+                <a
+                  href="https://instagram.com/thanuja.arc"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-black/40 text-white backdrop-blur-xl transition hover:scale-110 hover:border-pink-400/40 hover:text-pink-400"
+                >
+                  <FaInstagram className="text-lg transition group-hover:rotate-6" />
+                </a>
+
+                <a
+                  href="https://facebook.com/thanubsm"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-black/40 text-white backdrop-blur-xl transition hover:scale-110 hover:border-cyan-400/40 hover:text-cyan-400"
+                >
+                  <FaFacebookF className="text-lg transition group-hover:-rotate-6" />
+                </a>
+              </div>
               <img
                 src="/profile.png"
                 alt="Profile"
@@ -487,8 +576,30 @@ export default function Portfolio() {
                   Personal Identity
                 </p>
                 <h2 className="mt-3 max-w-md text-2xl font-semibold leading-tight md:text-3xl">
-                  Somewhere between a tech builder, a creative mind, and a
-                  future brand.
+                  {words.map((word, index) => (
+                    <motion.span
+                      key={index}
+                      initial={{
+                        opacity: 0,
+                        y: 20,
+                        filter: "blur(8px)",
+                      }}
+                      whileInView={{
+                        opacity: 1,
+                        y: 0,
+                        filter: "blur(0px)",
+                      }}
+                      transition={{
+                        duration: 0.5,
+                        delay: index * 0.08,
+                        ease: "easeOut",
+                      }}
+                      viewport={{ once: true }}
+                      className="mr-2 inline-block"
+                    >
+                      {word}
+                    </motion.span>
+                  ))}
                 </h2>
               </div>
             </div>
@@ -759,7 +870,19 @@ export default function Portfolio() {
                         </div>
 
                         {/* ANIMATED BAR */}
-                       
+                        <div className="mt-5 h-2 overflow-hidden rounded-full bg-white/10">
+                          <motion.div
+                            className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-fuchsia-500"
+                            initial={{ width: 0 }}
+                            animate={{
+                              width: stackVisible ? `${item.value}%` : "0%",
+                            }}
+                            transition={{
+                              duration: 1.2,
+                              ease: "easeOut",
+                            }}
+                          />
+                        </div>
                       </div>
                     </motion.div>
                   );
