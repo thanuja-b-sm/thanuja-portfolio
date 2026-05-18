@@ -384,32 +384,25 @@ function TimelineRoadmap() {
 export default function Portfolio() {
 
 const stackSectionRef = useRef(null);
-const [stackProgress, setStackProgress] = useState(0);
+const [stackVisible, setStackVisible] = useState(false);
 
 useEffect(() => {
-  const onScroll = () => {
-    if (!stackSectionRef.current) return;
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        setStackVisible(true);
+      }
+    },
+    {
+      threshold: 0.3,
+    }
+  );
 
-    const rect = stackSectionRef.current.getBoundingClientRect();
-    const windowHeight = window.innerHeight || 1;
+  if (stackSectionRef.current) {
+    observer.observe(stackSectionRef.current);
+  }
 
-    const total = rect.height + windowHeight;
-    const current = windowHeight - rect.top;
-
-    const next = Math.max(0, Math.min(1, current / total));
-
-    setStackProgress((prev) => prev + (next - prev) * 0.08);
-  };
-
-  onScroll();
-
-  window.addEventListener("scroll", onScroll, { passive: true });
-  window.addEventListener("resize", onScroll);
-
-  return () => {
-    window.removeEventListener("scroll", onScroll);
-    window.removeEventListener("resize", onScroll);
-  };
+  return () => observer.disconnect();
 }, []);
 
   return (
@@ -765,16 +758,16 @@ useEffect(() => {
                   {/* ANIMATED BAR */}
                   <div className="mt-5 h-2 overflow-hidden rounded-full bg-white/10">
                     <motion.div
-                      className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-fuchsia-500"
-                      initial={{ width: 0 }}
-                      animate={{
-                        width: `${item.value * stackProgress}%`,
-                      }}
-                      transition={{
-                        duration: 1,
-                        ease: "easeOut",
-                      }}
-                    />
+  className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-fuchsia-500"
+  initial={{ width: 0 }}
+  animate={{
+    width: stackVisible ? `${item.value}%` : "0%",
+  }}
+  transition={{
+    duration: 1.2,
+    ease: "easeOut",
+  }}
+/>
                   </div>
                 </div>
               </motion.div>
@@ -832,17 +825,17 @@ useEffect(() => {
 
                 {/* ANIMATED BAR */}
                 <div className="mt-5 h-3 overflow-hidden rounded-full bg-white/10">
-                  <motion.div
-                    className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-fuchsia-500"
-                    initial={{ width: 0 }}
-                    animate={{
-                      width: `${item.value * stackProgress}%`,
-                    }}
-                    transition={{
-                      duration: 1,
-                      ease: "easeOut",
-                    }}
-                  />
+                 <motion.div
+  className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-fuchsia-500"
+  initial={{ width: 0 }}
+  animate={{
+    width: stackVisible ? `${item.value}%` : "0%",
+  }}
+  transition={{
+    duration: 1.2,
+    ease: "easeOut",
+  }}
+/>
                 </div>
               </div>
 
